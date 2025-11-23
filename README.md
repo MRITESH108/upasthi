@@ -15,7 +15,7 @@ It is an initiative under **Digital India**, aiming to modernize the college man
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/MRITESH108/
+https://github.com/MRITESH108/upasthi.git
 ```
 ### 2. Initiate Server 
 
