@@ -1,8 +1,9 @@
 const express = require('express');
-const { handleRegisterCollege } = require('../../controllers/college');
+const { handleRegisterCollege, handleLoginCollege } = require('../../controllers/college');
 
 const collegeRouter = express.Router();
 
-collegeRouter.get('/college', handleRegisterCollege);
+collegeRouter.post('/college/register', handleRegisterCollege);
+collegeRouter.post('/college/login', handleLoginCollege);
 
 module.exports = collegeRouter;

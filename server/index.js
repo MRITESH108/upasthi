@@ -13,12 +13,14 @@ app.use(cors({
         // add your localhost url
         // add your production url
     ],
+    credentials:true,
+
 }));
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-            //  Routes 
+//  Routes 
 app.get('/',(req,res)=>{
     res.json({
         message:"let's start the project upasthi!"
@@ -27,9 +29,7 @@ app.get('/',(req,res)=>{
 
 app.use('/', collegeRouter); //college route
 
-
-
-const SERVER_PORT= process.env.SERVER_PORT;
+const SERVER_PORT= process.env.SERVER_PORT || 8000;
 app.listen(SERVER_PORT, ()=>{
     console.log(`server started at http://localhost:${SERVER_PORT}/`);
 });
