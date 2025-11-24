@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
-            // Router Source
+// Router Source
 const collegeRouter = require('./routes/college');
 
+dotenv.config();
 
 const app = express();
 app.use(cors({
@@ -26,6 +28,8 @@ app.get('/',(req,res)=>{
 app.use('/', collegeRouter); //college route
 
 
-app.listen(8000, ()=>{
-    console.log('server started at http://localhost:8000/');
-})
+
+const SERVER_PORT= process.env.SERVER_PORT;
+app.listen(SERVER_PORT, ()=>{
+    console.log(`server started at http://localhost:${SERVER_PORT}/`);
+});
