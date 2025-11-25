@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 // Router Source
 const collegeRouter = require('./routes/college');
+const studentRouter = require('./routes/student');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/', collegeRouter); //college route
+app.use('/', studentRouter); // student route
 
 const SERVER_PORT= process.env.SERVER_PORT || 8000;
 app.listen(SERVER_PORT, ()=>{

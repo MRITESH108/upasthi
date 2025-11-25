@@ -1,4 +1,5 @@
 const express = require('express');
+
 const { handleRegisterCollege, handleLoginCollege } = require('../../controllers/college');
 
 const collegeRouter = express.Router();
