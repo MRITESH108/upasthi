@@ -9,6 +9,7 @@ dotenv.config();
 const handleRegisterCollege = async (req, res) => {
     try {
         const { name, email, password, collegeCode } = req.body;
+        console.log(req.body)
         // check if all fields
         if (!name || !email || !password || !collegeCode) {
             return res.status(400).json({

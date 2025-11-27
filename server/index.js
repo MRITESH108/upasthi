@@ -6,16 +6,15 @@ const dotenv = require('dotenv');
 const collegeRouter = require('./routes/college');
 const studentRouter = require('./routes/student');
 
-dotenv.config();
+dotenv.config(); 
 
 const app = express();
 app.use(cors({
     origin:[
-        // add your localhost url
-        // add your production url
+        'http://localhost:5173',
+
     ],
     credentials:true,
-
 }));
 
 app.use(express.urlencoded({extended:true}));
