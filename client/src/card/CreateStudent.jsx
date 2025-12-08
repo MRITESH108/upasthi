@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import Input from './Input';
 import Button from './btn';
 
@@ -11,8 +12,18 @@ const CreateStudent = ({ formData, handleChange }) => {
     { label: "Date of Birth", name: "dob", type: "date" }
   ];
 
-  const handleSubmit = () => {
+  const url = import.meta.env.VITE_API_URL;
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
     console.log(formData);
+    try {
+      const res = await axios.post(`${url}/student/register`, formData);
+      console.log('Succesfully Registered :', res.data);
+    } catch (err) {
+      console.error('Registration  failed:', err);
+    }
+    
   };
 
   return (

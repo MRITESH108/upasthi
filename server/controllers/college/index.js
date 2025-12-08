@@ -100,10 +100,68 @@ const handleLoginCollege = async (req, res) => {
             error: err
         });
     }
-}
+};
+
+
+// RANDOM CODE GENERATION LOGIC
+const generateCode = async (req, res) => {
+    try {
+        collegeId = 5;  // later from middlewares
+        adminId = 5;    // later from middlewares
+
+        // Check if today's code exists for this college
+        const today = new Date().toISOString().split('T')[0];
+        const existingCode = await pool.query(
+            `SELECT code, expires_at FROM daily_codes 
+             WHERE college_id = $1 AND DATE(generated_at) = $2 
+             AND expires_at > NOW()
+             ORDER BY generated_at DESC LIMIT 1`,
+            [collegeId, today]
+        );
+
+        if (existingCode.rows.length > 0) {
+            return res.status(200).json({
+                message: "Today's code already generated",
+                code: existingCode.rows[0].code,
+                expiresAt: existingCode.rows[0].expires_at
+            });
+        }
+
+        // Generate new code
+        const charboundary = "A9BC6defGHJ45Kmnp7qrs8tuVWXYZ123";
+        let randmCode = '';
+        for (let i = 0; i < 6; ++i) {
+            randmCode += charboundary[Math.floor(Math.random() * charboundary.length)];
+        }
+
+        // Save to DB
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 1);
+
+        await pool.query(
+            `INSERT INTO daily_codes (college_id, code, expires_at, created_by)
+             VALUES ($1, $2, $3, $4)`,
+            [collegeId, randmCode, expiresAt, adminId]
+        );
+
+        res.status(201).json({
+            message: "Code generated and saved successfully",
+            code: randmCode
+        });
+
+    } catch (error) {
+        console.error('Generate code error:', error);
+        res.status(500).json({
+            message: "Failed to generate code",
+            error: error
+        });
+    }
+};
+
 
 module.exports = {
     handleRegisterCollege,
-    handleLoginCollege
+    handleLoginCollege,
+    generateCode
 };
 

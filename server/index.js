@@ -30,6 +30,7 @@ app.get('/',(req,res)=>{
 app.use('/', collegeRouter); //college route
 app.use('/', studentRouter); // student route
 
+
 const SERVER_PORT= process.env.SERVER_PORT || 8000;
 app.listen(SERVER_PORT, ()=>{
     console.log(`server started at http://localhost:${SERVER_PORT}/`);

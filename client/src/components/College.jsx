@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../card/btn';
 import StatCard from '../card/StatCard';
 import CreateStudent from '../card/CreateStudent';
+import axios from 'axios';
 
 
 const College = () => {
@@ -20,16 +21,19 @@ const College = () => {
     { label: "Notify Student", form: "notifyStudent" }
   ];
 
-
-
   const [activeForm, setActiveForm] = useState(null);
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const url = import.meta.env.VITE_API_URL;
+  const [genCode, setgenCode] = useState('generate attendance code')
 
+  const generCode = ()=> {
+    axios.get(`${url}/college/attendancecode`).then(res => setgenCode(res.data.code))
+    .catch((err)=> console.log(err));
+  }
 
   return (
     <div style={{ padding: '20px' }}>
@@ -40,6 +44,7 @@ const College = () => {
 
       {/* Token Section */}
       <section
+      // to change this section later with validation if todays code generated or not if not show generate code button 
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -49,9 +54,10 @@ const College = () => {
           marginBottom: '20px',
         }}
       >
-        <pre>lksdglkdhgldyleglheugfbffgiluey</pre>
+        <pre>{genCode}</pre>
         <button
           type="button"
+          onClick={generCode}
           style={{
             backgroundColor: '#fff',
             border: '1px solid #ccc',
@@ -60,7 +66,7 @@ const College = () => {
             cursor: 'pointer',
           }}
         >
-          Copy
+          Generate Code
         </button>
       </section>
 
