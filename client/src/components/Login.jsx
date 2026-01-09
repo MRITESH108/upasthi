@@ -49,7 +49,7 @@ const Login = () => {
           onChange={handleChange}
           placeholder="password"
         />
-        <Button label={'Login'} type={'submit'} />
+        <Button  label={'Login'} type={'submit'} />
       </form>
     </div>
   );

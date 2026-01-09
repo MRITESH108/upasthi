@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 // Router Source
 const collegeRouter = require('./routes/college');
 const studentRouter = require('./routes/student');
+const adminRouter = require('./routes/admin');
 
 dotenv.config(); 
 
@@ -29,6 +30,7 @@ app.get('/',(req,res)=>{
 
 app.use('/', collegeRouter); //college route
 app.use('/', studentRouter); // student route
+app.use('/', adminRouter); // admin route
 
 
 const SERVER_PORT= process.env.SERVER_PORT || 8000;

@@ -111,6 +111,7 @@ const handleLoginStudent = async (req, res) => {
   }
 };
 
+// attendance mark logic
 const markAttendance = async (req, res) => {
     try {
         

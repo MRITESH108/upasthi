@@ -3,9 +3,14 @@ import Button from '../card/btn';
 import StatCard from '../card/StatCard';
 import CreateStudent from '../card/CreateStudent';
 import axios from 'axios';
+import Textarea from '../card/Textarea';
+import CreateAdmin from '../card/CreateAdmin';
 
 
 const College = () => {
+
+  const [activeForm, setActiveForm] = useState(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +26,7 @@ const College = () => {
     { label: "Notify Student", form: "notifyStudent" }
   ];
 
-  const [activeForm, setActiveForm] = useState(null);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,9 +35,9 @@ const College = () => {
   const url = import.meta.env.VITE_API_URL;
   const [genCode, setgenCode] = useState('generate attendance code')
 
-  const generCode = ()=> {
+  const generCode = () => {
     axios.get(`${url}/college/attendancecode`).then(res => setgenCode(res.data.code))
-    .catch((err)=> console.log(err));
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -44,7 +49,7 @@ const College = () => {
 
       {/* Token Section */}
       <section
-      // to change this section later with validation if todays code generated or not if not show generate code button 
+        // to change this section later with validation if todays code generated or not if not show generate code button 
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -94,10 +99,28 @@ const College = () => {
         ))}
       </div>
 
+      {activeForm === "admin" && (
+        <div>
+          <CreateAdmin/>
+        </div>
+      )}
+
       {activeForm === "student" && (
         <CreateStudent formData={formData} handleChange={handleChange} />
       )}
-      
+
+      {activeForm === "notifyAdmin" && (
+        <div>
+          <Textarea label='Hii Staff Members, ' />
+        </div>
+      )}
+
+      {activeForm === "notifyStudent" && (
+        <div>
+          <Textarea label='Hii Student, ' />
+        </div>
+      )}
+
     </div>
   );
 };
