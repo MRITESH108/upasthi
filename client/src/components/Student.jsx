@@ -86,7 +86,7 @@ const Student = () => {
                     alignItems: 'center'
                 }}
             >
-                <div style={{ display: 'flex', gap: '30%', marginLeft: '5%' }}>
+                <div style={{ display: 'flex', gap: '20%', marginLeft: '5%' }}>
                     {weeks.map((week, index) => {
                         const isToday = week.date === week.todayDate;
                         return (
@@ -103,7 +103,7 @@ const Student = () => {
                     })}
                 </div>
 
-                <Button label="show" onClick={handlecheck} />
+                <div style={{width:'10%', display:'flex'}}><Button label="show" onClick={handlecheck} /></div>
             </div>
 
             {/* Dashboard Section */}

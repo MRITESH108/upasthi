@@ -90,12 +90,15 @@ const College = () => {
 
       {/* Actions Section */}
       <div>
+        <div style={{display:'flex',gap:'5px'}}>
         {actions.map(({ label, form }) => (
-          <Button
+          <div>
+            <Button
             key={label}
             label={label}
             onClick={() => setActiveForm(activeForm === form ? null : form)}
           />
+          </div>
         ))}
       </div>
 
@@ -121,6 +124,7 @@ const College = () => {
         </div>
       )}
 
+      </div>
     </div>
   );
 };
