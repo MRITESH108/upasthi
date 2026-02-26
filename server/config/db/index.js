@@ -13,7 +13,7 @@ const pool = new Pool({
 });
 
 pool.connect()
-    .then(() => console.log('Postgre database connected'))
-    .catch(err => console.error('Postgre database connection error', err));
+    .then(() => console.log('✅ Postgre database connected'))
+    .catch(err => console.error('❌ Postgre database connection error', err));
 
 module.exports = pool;

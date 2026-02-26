@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+const initDb = require("./config/initDb/index");
+
 // Router Source
 const collegeRouter = require('./routes/college');
 const studentRouter = require('./routes/student');
@@ -17,8 +19,8 @@ app.use(cors({
     credentials:true,
 }));
 
-app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 //  Routes 
 app.get('/',(req,res)=>{
@@ -33,6 +35,18 @@ app.use('/', adminRouter); // admin route
 
 
 const SERVER_PORT= process.env.SERVER_PORT || 8000;
+
+
+
+initDb()
+  .then(() => app.listen(SERVER_PORT, () =>
+    console.log(`server started at http://localhost:${SERVER_PORT}/`)
+  ))
+  .catch((e) => {
+    console.error("DB init failed:", e.message);
+    process.exit(1);
+  });
+
 app.listen(SERVER_PORT, ()=>{
     console.log(`server started at http://localhost:${SERVER_PORT}/`);
 });
